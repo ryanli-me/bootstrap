@@ -165,6 +165,8 @@ brew "tmuxinator"
 brew "diff-so-fancy"
 EOF
 
+update_fish_shell
+
 # fzf key bindings
 $(brew --prefix)/opt/fzf/install --all
 
@@ -172,7 +174,6 @@ $(brew --prefix)/opt/fzf/install --all
 # brew unlink heroku
 # brew link --force heroku
 
-update_fish_shell
 
 fancy_echo "Configuring asdf version manager ..."
 # if [ ! -d "$HOME/.asdf" ]; then
@@ -205,8 +206,10 @@ install_asdf_language() {
   local language="$1"
   local version
   version="$(asdf list-all "$language" | grep -v "[a-z]" | tail -1)"
+  fancy_echo "Found latest version for language: $language, version: $version"
 
   if ! asdf list "$language" | grep -Fq "$version"; then
+    fancy_echo "Installing language: $language, version: $version"
     asdf install "$language" "$version"
     asdf global "$language" "$version"
   fi

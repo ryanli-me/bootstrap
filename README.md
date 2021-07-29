@@ -9,3 +9,7 @@ adapted from https://github.com/joshukraine/mac-bootstrap/blob/master/install/ma
 TIMEZONE=America/Los_Angeles ./macos-defaults
 ## Step 3 Set up Tmuxinator
 ./tmuxinator
+
+# Bugs
+`mac` script is highly coupled with `dotfiles`, relying on correct $PATH for fish and could not link `homebrew` correctly without executing `dotfiles` install script. `fzf` completion might not be correctly installed and asdf might not correctly install ruby.
+=> Solution: `git clone git@github.com:ryanli-me/dotfiles.git` first
