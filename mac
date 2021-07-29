@@ -94,13 +94,17 @@ if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
     /bin/bash -c \
       "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    # Apple Silicon
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    append_to_zshrc '# recommended by brew doctor'
-
-    # shellcheck disable=SC2016
-    append_to_zshrc 'export PATH="/usr/local/bin:$PATH"' 1
-
-    export PATH="/usr/local/bin:$PATH"
+    # Intel
+    # append_to_zshrc '# recommended by brew doctor'
+    #
+    # # shellcheck disable=SC2016
+    # append_to_zshrc 'export PATH="/usr/local/bin:$PATH"' 1
+    #
+    # export PATH="/usr/local/bin:$PATH"
 fi
 
 if brew list | grep -Fq brew-cask; then
