@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Thank you, thoughtbot!
+bootstrap_echo() {
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\\n[BOOTSTRAP] $fmt\\n" "$@"
+}
+
+bootstrap_echo "Setting up Tmuxinator..."
+
+if [ ! -d "${HOME}/.tmuxinator/" ]; then
+  mkdir "${HOME}/.tmuxinator"
+fi
+  
+bootstrap_echo "Installing fish completions..."
+if [ ! -d "${HOME}/.config/fish/completions/" ]; then
+  mkdir "${HOME}/.config/fish/completions"
+fi
+curl -L https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.fish > ~/.config/fish/completions/tmuxinator.fish
+
+bootstrap_echo "Done!"
